@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NGM – Nouvelle Génération Magherbia</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
   --cream: #f5f0e8;
@@ -14,6 +14,7 @@
   --green-light: #3d8a5a;
   --green-pale: #e8f0eb;
   --gold: #c8960c;
+  --gold-light: #f0c040;
   --text-dark: #1a1a1a;
   --text-mid: #3d3d3d;
   --text-muted: #7a7a6a;
@@ -23,281 +24,233 @@
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--text-dark);overflow-x:hidden}
-::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-thumb{background:var(--green-mid);border-radius:3px}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text-dark);overflow-x:hidden}
 
-/* ══ NAV ══ */
-nav{
-  position:fixed;top:0;width:100%;z-index:300;
-  background:rgba(245,240,232,0.97);backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 5%;height:68px;
-}
+/* ─── NAV ─── */
+nav{position:fixed;top:0;width:100%;z-index:300;background:rgba(245,240,232,0.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:68px;transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 2px 24px rgba(26,74,46,0.10)}
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none}
-.logo-circle{
-  width:40px;height:40px;border-radius:50%;background:var(--green);
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff;flex-shrink:0;
-}
+.logo-circle{width:40px;height:40px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff;flex-shrink:0}
 .logo-text strong{display:block;font-size:14px;font-weight:700;color:var(--green);letter-spacing:-.2px}
 .logo-text span{font-size:11px;color:var(--text-muted)}
 .nav-links{display:flex;align-items:center;gap:4px;list-style:none}
-.nav-links a{
-  text-decoration:none;font-size:14px;font-weight:500;color:var(--text-mid);
-  padding:7px 14px;border-radius:50px;transition:background .18s,color .18s;white-space:nowrap;
-}
+.nav-links a{text-decoration:none;font-size:14px;font-weight:500;color:var(--text-mid);padding:7px 14px;border-radius:50px;transition:all .18s}
 .nav-links a:hover{background:var(--green-pale);color:var(--green)}
-.nav-links a.active{color:var(--green);font-weight:600}
-.hamburger{
-  display:none;flex-direction:column;gap:5px;cursor:pointer;
-  background:none;border:none;padding:4px;
-}
-.hamburger span{display:block;width:22px;height:2px;background:var(--green);border-radius:2px;transition:transform .25s,opacity .25s}
-.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--green);border-radius:2px;transition:.3s}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
 .hamburger.open span:nth-child(2){opacity:0}
-.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.nav-mobile{
-  display:none;position:fixed;top:68px;left:0;right:0;
-  background:rgba(245,240,232,0.98);backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--border);
-  flex-direction:column;padding:12px 5% 20px;gap:4px;z-index:299;
-}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.nav-mobile{display:none;position:fixed;top:68px;left:0;right:0;background:rgba(245,240,232,0.99);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);flex-direction:column;padding:12px 5%;z-index:299;gap:4px}
 .nav-mobile.open{display:flex}
-.nav-mobile a{
-  text-decoration:none;font-size:15px;font-weight:500;color:var(--text-mid);
-  padding:11px 16px;border-radius:10px;transition:background .18s,color .18s;
-}
+.nav-mobile a{text-decoration:none;font-size:15px;font-weight:500;color:var(--text-mid);padding:12px 16px;border-radius:12px;transition:.15s}
 .nav-mobile a:hover{background:var(--green-pale);color:var(--green)}
 @media(max-width:780px){.nav-links{display:none}.hamburger{display:flex}}
 
-/* ══ HERO ══ */
-.hero{
-  min-height:72vh;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;text-align:center;padding:110px 5% 60px;
-  background:linear-gradient(160deg,var(--cream) 55%,#dceae1 100%);
-}
-.hero-pill{
-  display:inline-flex;align-items:center;gap:8px;
-  border:1px solid rgba(26,74,46,0.25);background:rgba(26,74,46,0.06);
-  border-radius:50px;padding:6px 16px;margin-bottom:24px;
-  font-size:12px;font-weight:500;color:var(--green);letter-spacing:.3px;
-}
-.pill-dot{width:7px;height:7px;background:var(--green-light);border-radius:50%;animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.hero h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2.6rem,5.5vw,4.5rem);font-weight:900;line-height:1.08;
-  color:var(--text-dark);margin-bottom:8px;
-}
-.hero h1 em{font-style:normal;color:var(--green);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:6px}
-.hero p{font-size:15px;color:var(--text-muted);line-height:1.8;max-width:500px;margin:14px auto 0}
+/* ─── HERO (MARKETING ETHIQUE SECTION FIRST) ─── */
+.hero-ethique{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 5% 80px;background:var(--cream);position:relative;overflow:hidden}
+.hero-ethique::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%, rgba(61,138,90,0.08) 0%, transparent 70%);pointer-events:none}
+.hero-ethique::after{content:'NGM';position:absolute;font-family:'Playfair Display',serif;font-size:clamp(120px,20vw,280px);font-weight:900;color:rgba(26,74,46,0.04);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;white-space:nowrap;z-index:0;animation:subtleFloat 8s ease-in-out infinite}
+@keyframes subtleFloat{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-52%) scale(1.02)}}
 
-/* ══ STATS ══ */
-.stats{display:flex;flex-wrap:wrap;background:var(--green)}
-.stat-item{flex:1;min-width:130px;padding:28px 18px;text-align:center;border-right:1px solid rgba(255,255,255,0.12)}
+.section-label{color:var(--gold);font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;position:relative;z-index:1;opacity:0;animation:fadeUp .6s ease forwards .2s}
+.hero-ethique h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,6vw,5rem);font-weight:900;line-height:1.08;color:var(--text-dark);margin-bottom:20px;position:relative;z-index:1;opacity:0;animation:fadeUp .7s ease forwards .4s}
+.hero-ethique h1 em{font-style:italic;color:var(--green)}
+.hero-ethique > p{font-size:16px;color:var(--text-muted);line-height:1.8;max-width:560px;margin:0 auto 60px;position:relative;z-index:1;opacity:0;animation:fadeUp .7s ease forwards .6s}
+
+/* Floating shapes */
+.float-shape{position:absolute;border-radius:50%;pointer-events:none;opacity:.06}
+.float-shape.s1{width:300px;height:300px;background:var(--green);top:-80px;right:10%;animation:floatA 12s ease-in-out infinite}
+.float-shape.s2{width:200px;height:200px;background:var(--gold);bottom:10%;left:5%;animation:floatB 9s ease-in-out infinite}
+.float-shape.s3{width:150px;height:150px;background:var(--green-mid);top:40%;right:5%;animation:floatA 7s ease-in-out infinite 2s}
+@keyframes floatA{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-30px) rotate(10deg)}}
+@keyframes floatB{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(25px) rotate(-8deg)}}
+
+/* CARDS GRID */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:1100px;width:100%;position:relative;z-index:1;opacity:0;animation:fadeUp .8s ease forwards .8s}
+.ethic-card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:36px 24px;transition:all .35s cubic-bezier(.34,1.56,.64,1);box-shadow:0 2px 12px rgba(26,74,46,0.06);cursor:default;position:relative;overflow:hidden}
+.ethic-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--green-pale),transparent);opacity:0;transition:.35s}
+.ethic-card:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 20px 40px rgba(26,74,46,0.14)}
+.ethic-card:hover::before{opacity:1}
+.ethic-card .icon{font-size:48px;margin-bottom:20px;display:block;transition:.35s}
+.ethic-card:hover .icon{transform:scale(1.15) rotate(-5deg)}
+.ethic-card h3{font-family:'Playfair Display',serif;font-size:1.25rem;margin-bottom:12px;color:var(--green);font-weight:700}
+.ethic-card p{font-size:14px;color:var(--text-muted);line-height:1.7}
+.ethic-card .card-line{position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),var(--gold));transform:scaleX(0);transform-origin:left;transition:.35s}
+.ethic-card:hover .card-line{transform:scaleX(1)}
+
+/* ─── STATS ─── */
+.stats{display:flex;flex-wrap:wrap;background:var(--green);position:relative;overflow:hidden}
+.stats::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.stat-item{flex:1;min-width:120px;padding:32px 18px;text-align:center;border-right:1px solid rgba(255,255,255,0.10);position:relative;z-index:1;transition:.3s}
+.stat-item:hover{background:rgba(255,255,255,0.05)}
 .stat-item:last-child{border-right:none}
-.stat-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:#fff;display:block}
-.stat-lbl{font-size:11px;color:rgba(255,255,255,0.6);margin-top:3px}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:700;color:#fff;display:block;line-height:1}
+.stat-lbl{font-size:11px;color:rgba(255,255,255,0.55);margin-top:6px;letter-spacing:.5px}
 
-/* ══ SECTION COMMON ══ */
-.section{padding:80px 5%}
-.section-label{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;
-  color:var(--gold);margin-bottom:16px;
-}
-.section-title{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2rem,4vw,3rem);font-weight:900;
-  color:var(--text-dark);margin-bottom:16px;line-height:1.1;
-}
-.section-sub{font-size:15px;color:var(--text-muted);line-height:1.8;max-width:580px;margin:0 auto 50px;text-align:center}
-.section-center{text-align:center}
+/* ─── COMPRENDRE ─── */
+.comprendre{padding:80px 5%;background:var(--cream-dark)}
+.comprendre .inner-header{text-align:center;margin-bottom:48px}
+.comprendre h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;color:var(--text-dark);margin-bottom:8px}
+.comprendre .sub{font-size:14px;color:var(--text-muted)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.card{background:var(--white);border:1px solid var(--border);border-radius:18px;overflow:hidden;cursor:pointer;transition:all .3s cubic-bezier(.34,1.2,.64,1)}
+.card:hover{transform:translateY(-8px);box-shadow:0 16px 40px rgba(26,74,46,0.12)}
+.card-img{width:100%;aspect-ratio:16/9;overflow:hidden;position:relative}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:.6s}
+.card:hover .card-img img{transform:scale(1.08)}
+.card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,74,46,0.5),transparent);opacity:0;transition:.3s;display:flex;align-items:flex-end;padding:16px}
+.card:hover .card-overlay{opacity:1}
+.card-overlay span{color:#fff;font-size:12px;font-weight:600;letter-spacing:1px}
+.card-body{padding:16px}
+.card-tag{font-size:11px;color:var(--gold);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.card-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--text-dark);margin-bottom:4px}
+.card-price{font-size:12px;color:var(--text-muted)}
 
-/* ══ COMPRENDRE GRID ══ */
-.page{padding:50px 5% 80px}
-.page-title{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,2.5vw,2rem);font-weight:700;color:var(--text-dark);margin-bottom:6px}
-.page-sub{font-size:14px;color:var(--text-muted);margin-bottom:32px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-
-/* ══ CARD ══ */
-.card{
-  background:var(--white);border:1px solid var(--border);
-  border-radius:16px;overflow:hidden;cursor:pointer;
-  opacity:0;transform:translateY(24px) scale(0.97);
-  animation:fadeInUp .5s ease forwards;
-  transition:transform .25s,box-shadow .25s;
-}
-.card:hover{transform:translateY(-6px);box-shadow:0 14px 32px rgba(26,74,46,0.14)}
-@keyframes fadeInUp{to{opacity:1;transform:translateY(0) scale(1)}}
-.card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.12s}
-.card:nth-child(3){animation-delay:.18s}.card:nth-child(4){animation-delay:.25s}
-.card:nth-child(5){animation-delay:.32s}.card:nth-child(6){animation-delay:.38s}
-.card:nth-child(7){animation-delay:.45s}.card:nth-child(8){animation-delay:.52s}
-.card-img{width:100%;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.card-img svg{width:72%!important;height:72%!important;transition:transform .3s ease}
-.card:hover .card-img svg{transform:scale(1.08)}
-.card-body{padding:14px 14px 16px}
-.card-tag{font-size:11px;color:var(--gold);font-weight:500;margin-bottom:4px}
-.card-name{font-size:15px;font-weight:600;color:var(--text-dark);margin-bottom:6px}
-.card-price{font-size:13px;color:var(--text-muted)}
-
-/* ══ NOS PRODUITS ══ */
-.produits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start}
-.produit-card{
-  background:var(--white);border:1px solid var(--border);
-  border-radius:20px;padding:32px 28px;
-}
-.produit-card.featured{
-  background:var(--green);border-color:var(--green);
-  transform:scale(1.03);
-}
-.produit-badge{
-  display:inline-block;font-size:11px;font-weight:700;
-  letter-spacing:.8px;text-transform:uppercase;
-  padding:5px 12px;border-radius:50px;margin-bottom:20px;
-}
-.produit-badge.default{background:var(--green-pale);color:var(--green)}
-.produit-badge.featured-badge{background:rgba(200,150,12,0.25);color:var(--gold)}
-.produit-badge.edu{background:#e8f0f5;color:#2a4a8a}
-.produit-card h3{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--text-dark);margin-bottom:12px}
-.produit-card.featured h3{color:#fff}
-.produit-card p{font-size:14px;color:var(--text-muted);line-height:1.7;margin-bottom:20px}
-.produit-card.featured p{color:rgba(255,255,255,0.75)}
-.produit-list{list-style:none;display:flex;flex-direction:column;gap:10px}
-.produit-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--text-mid)}
-.produit-card.featured .produit-list li{color:rgba(255,255,255,0.85)}
-.produit-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:5px}
-
-/* ══ NOTRE ETHIQUE ══ */
-.ethique-wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
-.ethique-steps{display:flex;flex-direction:column;gap:32px}
-.ethique-step{display:flex;gap:20px;align-items:flex-start}
-.step-num{
-  min-width:44px;height:22px;background:var(--green);border-radius:50px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:12px;font-weight:700;color:#fff;margin-top:4px;
-}
-.step-body h4{font-size:15px;font-weight:700;color:var(--text-dark);margin-bottom:6px}
-.step-body p{font-size:13px;color:var(--text-muted);line-height:1.7}
-
-.ethique-compare{background:var(--green);border-radius:20px;padding:28px}
-.ethique-compare h4{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:20px;line-height:1.4}
-.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.compare-cell{background:rgba(255,255,255,0.08);border-radius:12px;padding:14px}
-.compare-cell.bad{background:rgba(0,0,0,0.15)}
-.compare-cell-label{
-  font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
-  margin-bottom:8px;
-}
-.compare-cell.bad .compare-cell-label{color:#f08080}
-.compare-cell.good .compare-cell-label{color:rgba(200,220,200,0.9)}
-.compare-cell p{font-size:12px;line-height:1.6}
-.compare-cell.bad p{color:rgba(255,255,255,0.65)}
-.compare-cell.good p{color:rgba(255,255,255,0.85)}
-
-/* ══ COMPRENDRE (info cards) ══ */
-.info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.info-card{
-  background:var(--white);border:1px solid var(--border);
-  border-radius:16px;padding:24px 20px;
-}
-.info-icon{
-  width:44px;height:44px;border-radius:12px;background:var(--cream);
-  display:flex;align-items:center;justify-content:center;
-  font-size:22px;margin-bottom:16px;
-}
-.info-card h4{font-size:15px;font-weight:700;color:var(--green);margin-bottom:10px;line-height:1.35}
+/* ─── INFO CARDS ─── */
+.info-section{padding:60px 5%;background:var(--cream)}
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1100px;margin:0 auto}
+@media(max-width:900px){.info-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.info-grid{grid-template-columns:1fr}}
+.info-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:24px;transition:.3s;cursor:default}
+.info-card:hover{box-shadow:var(--shadow);border-color:rgba(26,74,46,0.25);transform:translateY(-4px)}
+.info-icon{width:48px;height:48px;border-radius:14px;background:var(--green-pale);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px;transition:.3s}
+.info-card:hover .info-icon{background:var(--green);transform:scale(1.1)}
+.info-card h4{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--green);margin-bottom:8px}
 .info-card p{font-size:13px;color:var(--text-muted);line-height:1.7}
 
-/* ══ FAQ ══ */
-.faq-wrap{max-width:740px;margin:0 auto}
+/* ─── NOTRE ETHIQUE ─── */
+.notre-ethique{background:var(--green);padding:90px 5%;text-align:center;position:relative;overflow:hidden}
+.notre-ethique::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.notre-ethique .section-label{color:var(--gold-light);opacity:1;animation:none}
+.notre-ethique h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:900;color:#fff;margin-bottom:16px}
+.notre-ethique > p{font-size:15px;color:rgba(255,255,255,0.65);max-width:600px;margin:0 auto 50px;line-height:1.8}
+.ethique-pillars{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;max-width:900px;margin:0 auto 40px}
+.pillar{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:16px;padding:20px 24px;text-align:left;flex:1;min-width:200px;transition:.3s;position:relative;overflow:hidden}
+.pillar::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold-light),transparent);transform:scaleX(0);transform-origin:left;transition:.4s}
+.pillar:hover{background:rgba(255,255,255,0.13);transform:translateY(-4px)}
+.pillar:hover::before{transform:scaleX(1)}
+.pillar-icon{font-size:24px;margin-bottom:10px;display:block}
+.pillar h3{font-size:14px;font-weight:700;color:#fff;margin-bottom:6px}
+.pillar p{font-size:12px;color:rgba(255,255,255,0.6);line-height:1.6}
+.ethique-box{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:14px;padding:18px 28px;display:inline-block;font-size:13px;color:rgba(255,255,255,0.75);position:relative;z-index:1}
+
+/* ─── RDV ─── */
+.rdv-section{background:var(--cream-dark);padding:100px 5%;text-align:center}
+.rdv-content{max-width:600px;margin:0 auto}
+.rdv-section h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:900;color:var(--text-dark);margin-bottom:16px}
+.rdv-section > .rdv-content > p{font-size:15px;color:var(--text-muted);line-height:1.75;margin-bottom:36px}
+.rdv-date{display:inline-flex;align-items:center;gap:8px;background:white;padding:8px 20px;border-radius:50px;box-shadow:0 4px 15px rgba(0,0,0,0.08);margin-bottom:32px;font-size:14px;font-weight:500;color:var(--text-mid)}
+.rdv-date .day{background:#e11d48;color:white;font-size:13px;font-weight:700;padding:4px 12px;border-radius:50px}
+.rdv-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.rdv-btn{display:inline-flex;align-items:center;gap:8px;padding:15px 32px;border-radius:50px;font-size:14px;font-weight:600;text-decoration:none;min-width:230px;justify-content:center;transition:all .3s cubic-bezier(.34,1.56,.64,1)}
+.rdv-btn-green{background:var(--green);color:white;border:2px solid var(--green)}
+.rdv-btn-green:hover{background:#143c25;transform:translateY(-4px);box-shadow:0 12px 30px rgba(26,74,46,0.25)}
+.rdv-btn-outline{background:transparent;color:var(--green);border:2px solid var(--green)}
+.rdv-btn-outline:hover{background:var(--green);color:white;transform:translateY(-4px)}
+
+/* ─── SIMULATEUR ─── */
+.simulateur-section{background:var(--green);color:white;padding:90px 5%;text-align:center;position:relative;overflow:hidden}
+.simulateur-section::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,0.04)}
+.simulateur-section::after{content:'';position:absolute;bottom:-80px;left:-80px;width:300px;height:300px;border-radius:50%;background:rgba(200,150,12,0.08)}
+.simulateur-container{max-width:500px;margin:0 auto;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:24px;padding:40px 32px;position:relative;z-index:1}
+.simulateur-header{margin-bottom:32px}
+.simulateur-header h2{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:900;margin-bottom:8px}
+.simulateur-header p{font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7}
+.form-group{text-align:left;margin-bottom:20px}
+.form-group label{display:block;font-size:13px;font-weight:500;margin-bottom:8px;color:rgba(255,255,255,0.85)}
+.form-input,.form-select{width:100%;padding:13px 18px;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.2);border-radius:12px;color:white;font-size:14px;font-family:'DM Sans',sans-serif;transition:.25s;outline:none}
+.form-input:focus,.form-select:focus{border-color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.15)}
+.form-input::placeholder{color:rgba(255,255,255,0.35)}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592c.858 0 1.318 1.013.753 1.658L8.753 11.14a.5.5 0 0 1-.753 0z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 18px center;cursor:pointer}
+.form-select option{color:var(--text-dark);background:white}
+.simulateur-btn{background:white;color:var(--green);border:none;padding:16px 40px;font-size:15px;font-weight:700;font-family:'DM Sans',sans-serif;border-radius:50px;cursor:pointer;margin-top:8px;width:100%;transition:all .3s cubic-bezier(.34,1.56,.64,1)}
+.simulateur-btn:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,0.2)}
+#sim-result{margin-top:24px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);border-radius:16px;padding:20px;display:none;animation:fadeUp .4s ease}
+#sim-result.show{display:block}
+.sim-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.1);font-size:13px}
+.sim-row:last-child{border-bottom:none;padding-top:12px;font-size:15px;font-weight:700}
+.sim-row span:last-child{color:var(--gold-light)}
+
+/* ─── FAQ ─── */
+.faq-section{padding:80px 5%;background:var(--cream)}
+.faq-section .inner-header{text-align:center;margin-bottom:48px}
+.faq-section h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;color:var(--text-dark);margin-bottom:8px}
+.faq-section .sub{font-size:14px;color:var(--text-muted)}
+.faq-wrap{max-width:720px;margin:0 auto}
 .faq-item{border-bottom:1px solid var(--border);overflow:hidden}
-.faq-q{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:22px 0;cursor:pointer;gap:20px;
-}
-.faq-q span{font-size:16px;font-weight:500;color:var(--text-dark);line-height:1.4}
-.faq-btn{
-  min-width:32px;height:32px;border-radius:50%;
-  background:var(--green-pale);border:none;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  font-size:18px;color:var(--green);font-weight:300;
-  transition:transform .3s,background .2s;
-}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:22px 0;cursor:pointer;gap:20px;transition:.2s}
+.faq-q:hover .faq-q-text{color:var(--green)}
+.faq-q-text{font-size:15px;font-weight:500;color:var(--text-dark);transition:.2s;line-height:1.5}
+.faq-btn{min-width:32px;height:32px;border-radius:50%;background:var(--green-pale);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--green);transition:all .35s;font-weight:300;flex-shrink:0}
 .faq-item.open .faq-btn{transform:rotate(45deg);background:var(--green);color:#fff}
-.faq-a{
-  max-height:0;overflow:hidden;
-  transition:max-height .4s ease,padding .3s ease;
-  font-size:14px;color:var(--text-muted);line-height:1.8;
-}
-.faq-item.open .faq-a{max-height:300px;padding-bottom:20px}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .45s ease,padding .3s ease;font-size:14px;color:var(--text-muted);line-height:1.8}
+.faq-item.open .faq-a{max-height:300px;padding-bottom:22px}
+.faq-a-inner{background:var(--green-pale);border-radius:12px;padding:16px 18px;border-left:3px solid var(--green)}
 
-/* ══ DETAIL OVERLAY ══ */
-.overlay{
-  position:fixed;inset:0;z-index:400;
-  background:rgba(0,0,0,0.45);
-  display:none;align-items:flex-end;justify-content:center;
-}
-.overlay.open{display:flex}
-.detail-sheet{
-  background:var(--white);border-radius:24px 24px 0 0;
-  width:100%;max-width:600px;max-height:92vh;
-  overflow-y:auto;padding:0 0 40px;
-  animation:slideUp .3s ease;
-}
-@keyframes slideUp{from{transform:translateY(60px);opacity:0}to{transform:translateY(0);opacity:1}}
-.sheet-handle{width:40px;height:4px;background:var(--cream-dark);border-radius:4px;margin:14px auto 0}
-.sheet-close{
-  position:absolute;top:16px;right:20px;width:32px;height:32px;border-radius:50%;
-  background:var(--cream);border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:16px;cursor:pointer;color:var(--text-muted);
-}
-.detail-hero{width:100%;aspect-ratio:16/9;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:5rem;margin:12px 0 0}
-.detail-body{padding:24px 28px 0}
-.detail-tag{font-size:12px;color:var(--gold);font-weight:600;margin-bottom:6px}
-.detail-title{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;color:var(--text-dark);margin-bottom:4px}
-.detail-desc{font-size:14px;color:var(--text-muted);line-height:1.75;margin:14px 0 20px}
-.detail-sep{border:none;border-top:1px solid var(--border);margin:20px 0}
-.detail-section-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--text-dark);margin-bottom:12px}
-.detail-list{list-style:none;display:flex;flex-direction:column;gap:10px}
-.detail-list li{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--text-mid);line-height:1.6}
-.dl-dot{min-width:7px;height:7px;background:var(--green-mid);border-radius:50%;margin-top:6px}
-.detail-danger{background:#fdf5f5;border:1px solid rgba(200,50,50,0.18);border-radius:12px;padding:14px 16px;font-size:13px;color:#8a0000;line-height:1.6;margin-top:10px}
-.detail-ok{background:var(--green-pale);border:1px solid rgba(26,74,46,0.18);border-radius:12px;padding:14px 16px;font-size:13px;color:var(--green);line-height:1.6;margin-top:10px}
-.detail-table{width:100%;border-collapse:collapse;font-size:13px}
-.detail-table th{background:var(--green);color:#fff;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;padding:10px 14px;text-align:left}
-.detail-table td{padding:11px 14px;color:var(--text-mid);border-bottom:1px solid var(--border);background:var(--cream)}
+/* ─── FOOTER ─── */
+footer{background:var(--text-dark);padding:48px 5% 32px;text-align:center;color:white}
+.f-logo{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;margin-bottom:10px;color:#fff}
+.f-tagline{font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:20px}
+.f-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margin-bottom:24px}
+.f-links a{font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;transition:.2s}
+.f-links a:hover{color:rgba(255,255,255,0.85)}
+footer p{font-size:12px;color:rgba(255,255,255,0.3);line-height:1.9}
+
+/* ─── DETAIL OVERLAY ─── */
+.overlay{position:fixed;inset:0;z-index:400;background:rgba(0,0,0,0);display:none;align-items:flex-end;justify-content:center;transition:background .35s}
+.overlay.open{display:flex;background:rgba(0,0,0,0.5)}
+.detail-sheet{background:var(--white);border-radius:28px 28px 0 0;width:100%;max-width:640px;max-height:90vh;overflow-y:auto;padding:0 0 48px;animation:slideUp .4s cubic-bezier(.34,1.1,.64,1)}
+@keyframes slideUp{from{transform:translateY(80px);opacity:0}to{transform:translateY(0);opacity:1}}
+.sheet-handle{width:40px;height:4px;background:var(--cream-dark);border-radius:4px;margin:16px auto 0}
+.sheet-close{position:absolute;top:20px;right:22px;width:34px;height:34px;border-radius:50%;background:var(--cream);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;color:var(--text-muted);transition:.2s;z-index:10}
+.sheet-close:hover{background:var(--cream-dark)}
+.detail-hero{width:100%;height:160px;display:flex;align-items:center;justify-content:center;font-size:80px;margin:12px 0 0;background:var(--green-pale);position:relative}
+.detail-hero-icon{animation:iconBounce .6s cubic-bezier(.34,1.8,.64,1) forwards}
+@keyframes iconBounce{from{transform:scale(0) rotate(-20deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
+.detail-body{padding:28px 32px 0}
+.detail-tag{font-size:11px;color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.detail-title{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--text-dark);margin-bottom:6px}
+.detail-desc{font-size:14px;color:var(--text-muted);line-height:1.8;margin:14px 0 24px}
+.detail-sep{border:none;border-top:1px solid var(--border);margin:24px 0}
+.detail-section-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--text-dark);margin-bottom:14px}
+.detail-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.detail-list li{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--text-mid);line-height:1.65;background:var(--cream);padding:12px 14px;border-radius:10px}
+.dl-dot{min-width:8px;height:8px;background:var(--green-mid);border-radius:50%;margin-top:6px;flex-shrink:0}
+.dl-x{min-width:8px;height:8px;background:#e11d48;border-radius:50%;margin-top:6px;flex-shrink:0}
+.detail-danger{background:#fdf5f5;border:1px solid rgba(200,50,50,0.18);border-radius:14px;padding:16px 18px;font-size:13px;color:#8a0000;line-height:1.7;margin-top:10px}
+.detail-ok{background:var(--green-pale);border:1px solid rgba(26,74,46,0.18);border-radius:14px;padding:16px 18px;font-size:13px;color:var(--green);line-height:1.7;margin-top:10px}
+.detail-table{width:100%;border-collapse:collapse;font-size:13px;border-radius:12px;overflow:hidden;margin-top:4px}
+.detail-table th{background:var(--green);color:#fff;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;padding:12px 16px;text-align:left}
+.detail-table td{padding:12px 16px;color:var(--text-mid);border-bottom:1px solid var(--border);background:var(--cream)}
 .detail-table tr:last-child td{border-bottom:none}
-.detail-table td strong{color:var(--text-dark)}
-.big-num{font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;color:var(--green);line-height:1;display:block;text-align:center;margin:10px 0 4px}
-.big-num-lbl{text-align:center;font-size:13px;color:var(--text-muted);margin-bottom:16px}
-.tag-pill{display:inline-block;padding:4px 12px;border-radius:50px;font-size:11px;font-weight:600}
-.tag-green{background:var(--green-pale);color:var(--green)}
-.tag-red{background:#fdf5f5;color:#c03030}
+.big-num{font-family:'Playfair Display',serif;font-size:5rem;font-weight:900;color:var(--green);line-height:1;display:block;text-align:center;margin:12px 0 4px}
+.big-num-lbl{text-align:center;font-size:13px;color:var(--text-muted);margin-bottom:20px}
+.highlight-box{background:linear-gradient(135deg,var(--green),var(--green-mid));border-radius:16px;padding:24px;text-align:center;margin-top:4px}
+.highlight-box .big-num{color:#fff}
+.highlight-box .big-num-lbl{color:rgba(255,255,255,0.7);margin-bottom:8px}
+.highlight-box p{font-size:12px;color:rgba(255,255,255,0.7)}
 
-/* ══ FOOTER ══ */
-footer{background:var(--green);padding:40px 5% 32px;text-align:center}
-.f-logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:8px}
-footer p{font-size:12px;color:rgba(255,255,255,0.55);line-height:1.8;max-width:500px;margin:0 auto}
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+.reveal-delay-5{transition-delay:.5s}
 
-@media(max-width:900px){
-  .ethique-wrap{grid-template-columns:1fr}
-  .produits-grid{grid-template-columns:1fr}
-  .produit-card.featured{transform:none}
-  .info-grid{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:700px){.grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:480px){.grid{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr}}
+/* Counter animation */
+.counter{display:inline-block}
 </style>
 </head>
 <body>
 
-<!-- ══ NAV ══ -->
-<nav>
+<!-- NAV -->
+<nav id="nav">
   <a class="logo" href="#">
     <div class="logo-circle">M</div>
     <div class="logo-text">
@@ -306,378 +259,288 @@ footer p{font-size:12px;color:rgba(255,255,255,0.55);line-height:1.8;max-width:5
     </div>
   </a>
   <ul class="nav-links">
+    <li><a href="#accueil">Accueil</a></li>
     <li><a href="#comprendre">Comprendre</a></li>
     <li><a href="#ethique">Notre Éthique</a></li>
-    <li><a href="#produits">Nos Produits</a></li>
-    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#rdv">Prendre RDV</a></li>
     <li><a href="#simulateur">Simulateur</a></li>
+    <li><a href="#faq">FAQ</a></li>
   </ul>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </button>
 </nav>
 <div class="nav-mobile" id="nav-mobile">
+  <a href="#accueil" onclick="closeMenu()">Accueil</a>
   <a href="#comprendre" onclick="closeMenu()">Comprendre</a>
   <a href="#ethique" onclick="closeMenu()">Notre Éthique</a>
-  <a href="#produits" onclick="closeMenu()">Nos Produits</a>
-  <a href="#faq" onclick="closeMenu()">FAQ</a>
+  <a href="#rdv" onclick="closeMenu()">Prendre RDV</a>
   <a href="#simulateur" onclick="closeMenu()">Simulateur</a>
+  <a href="#faq" onclick="closeMenu()">FAQ</a>
 </div>
 
-<!-- ══ HERO ══ -->
-<section class="hero">
-  <div class="hero-pill"><span class="pill-dot"></span> Contrat NGM · Transparence totale</div>
-  <h1>Votre avenir mérite<br>une assurance <em>honnête</em></h1>
-  <p>Explorez chaque section du contrat NGM. Cliquez sur une carte pour voir tous les détails.</p>
+<!-- ═══ HERO (STARTS WITH MARKETING ETHIQUE) ═══ -->
+<section class="hero-ethique" id="accueil">
+  <div class="float-shape s1"></div>
+  <div class="float-shape s2"></div>
+  <div class="float-shape s3"></div>
+  <div class="section-label">NOTRE ENGAGEMENT</div>
+  <h1>Le marketing éthique<br>au cœur du <em>NGM</em></h1>
+  <p>Ce site incarne les valeurs du code éthique de Taaminate Maghrebia Vie. Chaque information est présentée sans filtre ni pression.</p>
+  <div class="cards-grid">
+    <div class="ethic-card">
+      <span class="icon">🔍</span>
+      <h3>Transparence</h3>
+      <p>Tous les frais, garanties et exclusions sont expliqués clairement, avant toute souscription.</p>
+      <div class="card-line"></div>
+    </div>
+    <div class="ethic-card">
+      <span class="icon">🤝</span>
+      <h3>Honnêteté</h3>
+      <p>Nous présentons des informations réelles et vérifiables, sans promesses exagérées.</p>
+      <div class="card-line"></div>
+    </div>
+    <div class="ethic-card">
+      <span class="icon">⚖️</span>
+      <h3>Responsabilité</h3>
+      <p>Nous vous aidons à prendre des décisions adaptées à votre situation personnelle.</p>
+      <div class="card-line"></div>
+    </div>
+    <div class="ethic-card">
+      <span class="icon">📖</span>
+      <h3>Clarté</h3>
+      <p>Les termes techniques sont simplifiés pour que vous compreniez vraiment votre contrat.</p>
+      <div class="card-line"></div>
+    </div>
+    <div class="ethic-card">
+      <span class="icon">🚫</span>
+      <h3>Sans pression</h3>
+      <p>Notre objectif n'est pas de vendre, mais de vous informer. Vous décidez librement.</p>
+      <div class="card-line"></div>
+    </div>
+  </div>
 </section>
 
-<!-- ══ STATS ══ -->
+<!-- STATS -->
 <div class="stats">
-  <div class="stat-item"><span class="stat-num">4</span><span class="stat-lbl">Parties au contrat</span></div>
-  <div class="stat-item"><span class="stat-num">3</span><span class="stat-lbl">Garanties complémentaires</span></div>
-  <div class="stat-item"><span class="stat-num">15j</span><span class="stat-lbl">Droit de rétractation</span></div>
-  <div class="stat-item"><span class="stat-num">85%</span><span class="stat-lbl">Bénéfices reversés min.</span></div>
-  <div class="stat-item"><span class="stat-num">80%</span><span class="stat-lbl">Avance max épargne</span></div>
+  <div class="stat-item"><span class="stat-num counter" data-target="4">0</span><span class="stat-lbl">Parties au contrat</span></div>
+  <div class="stat-item"><span class="stat-num counter" data-target="3">0</span><span class="stat-lbl">Garanties complémentaires</span></div>
+  <div class="stat-item"><span class="stat-num" data-target="15">15j</span><span class="stat-lbl">Droit de rétractation</span></div>
+  <div class="stat-item"><span class="stat-num counter" data-target="85" data-suffix="%">0%</span><span class="stat-lbl">Bénéfices reversés min.</span></div>
+  <div class="stat-item"><span class="stat-num counter" data-target="80" data-suffix="%">0%</span><span class="stat-lbl">Avance max épargne</span></div>
 </div>
 
-<!-- ══ COMPRENDRE — contrat cards ══ -->
-<div class="page" id="comprendre">
-  <p class="page-title">Les sections du contrat</p>
-  <p class="page-sub">Appuyez sur une carte pour afficher les détails complets</p>
+<!-- ═══ COMPRENDRE ═══ -->
+<div class="comprendre" id="comprendre">
+  <div class="inner-header reveal">
+    <div class="section-label" style="opacity:1;animation:none">LES SECTIONS</div>
+    <h2>Explorez votre contrat</h2>
+    <p class="sub">Cliquez sur une carte pour afficher tous les détails</p>
+  </div>
   <div class="grid">
-
-  <!-- 1. Les 4 parties -->
-<div class="card" onclick="openDetail('parties')">
-    <div class="card-img">
-      <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80" 
-           alt="Les 4 parties du contrat d'assurance vie" 
-           style="width:100%; height:100%; object-fit:cover;">
+    <div class="card reveal reveal-delay-1" onclick="openDetail('parties')">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80" alt="">
+        <div class="card-overlay"><span>Voir les détails →</span></div>
+      </div>
+      <div class="card-body"><div class="card-tag">Le contrat</div><div class="card-name">Les 4 parties</div><div class="card-price">Assureur · Souscripteur · Assuré · Bénéficiaire</div></div>
     </div>
-    <div class="card-body">
-      <div class="card-tag">Le contrat</div>
-      <div class="card-name">Les 4 parties</div>
-      <div class="card-price">Assureur · Souscripteur · Assuré · Bénéficiaire</div>
+    <div class="card reveal reveal-delay-2" onclick="openDetail('garanties')">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&q=80" alt="">
+        <div class="card-overlay"><span>Voir les détails →</span></div>
+      </div>
+      <div class="card-body"><div class="card-tag">Couverture</div><div class="card-name">Les garanties</div><div class="card-price">Décès · Survie · Options</div></div>
     </div>
-  </div>
-
-  <!-- 2. Les garanties -->
-  <div class="card" onclick="openDetail('garanties')">
-    <div class="card-img">
-      <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&q=80" 
-           alt="Garanties assurance vie" 
-           style="width:100%; height:100%; object-fit:cover;">
+    <div class="card reveal reveal-delay-3" onclick="openDetail('exclusions')">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80" alt="">
+        <div class="card-overlay"><span>Voir les détails →</span></div>
+      </div>
+      <div class="card-body"><div class="card-tag">Limites</div><div class="card-name">Les exclusions</div><div class="card-price">Ce qui n'est pas couvert</div></div>
     </div>
-    <div class="card-body">
-      <div class="card-tag">Couverture</div>
-      <div class="card-name">Les garanties</div>
-      <div class="card-price">Décès · Survie · Options</div>
+    <div class="card reveal reveal-delay-1" onclick="openDetail('retractation')">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=800&q=80" alt="">
+        <div class="card-overlay"><span>Voir les détails →</span></div>
+      </div>
+      <div class="card-body"><div class="card-tag">Votre droit</div><div class="card-name">Rétractation</div><div class="card-price">15 jours · Remboursement total</div></div>
     </div>
-  </div>
-
-  <!-- 3. Les exclusions -->
-  <div class="card" onclick="openDetail('exclusions')">
-    <div class="card-img">
-      <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80" 
-           alt="Exclusions et limites" 
-           style="width:100%; height:100%; object-fit:cover;">
+    <div class="card reveal reveal-delay-2" onclick="openDetail('declarations')">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80" alt="">
+        <div class="card-overlay"><span>Voir les détails →</span></div>
+      </div>
+      <div class="card-body"><div class="card-tag">Honnêteté</div><div class="card-name">Déclarations</div><div class="card-price">Questionnaires · Conséquences</div></div>
     </div>
-    <div class="card-body">
-      <div class="card-tag">Limites</div>
-      <div class="card-name">Les exclusions</div>
-      <div class="card-price">Ce qui n'est pas couvert</div>
+    <div class="card reveal reveal-delay-3" onclick="openDetail('paiement')">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80" alt="">
+        <div class="card-overlay"><span>Voir les détails →</span></div>
+      </div>
+      <div class="card-body"><div class="card-tag">Votre épargne</div><div class="card-name">Paiement & investissement</div><div class="card-price">3 modes · 85% bénéfices min.</div></div>
     </div>
-  </div>
-
-  <!-- 4. Rétractation (corrigée + image adaptée) -->
-  <div class="card" onclick="openDetail('retractation')">
-    <div class="card-img">
-      <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=800&q=80" 
-           alt="Droit de rétractation assurance" 
-           style="width:100%; height:100%; object-fit:cover;">
-    </div>
-    <div class="card-body">
-      <div class="card-tag">Votre droit</div>
-      <div class="card-name">Rétractation</div>
-      <div class="card-price">15 jours · Remboursement total</div>
+    <div class="card reveal reveal-delay-1" onclick="openDetail('avance')">
+      <div class="card-img">
+        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80" alt="">
+        <div class="card-overlay"><span>Voir les détails →</span></div>
+      </div>
+      <div class="card-body"><div class="card-tag">Liquidités</div><div class="card-name">Avance sur contrat</div><div class="card-price">Jusqu'à 80% · 36 mois max</div></div>
     </div>
   </div>
-
-  <!-- 5. Déclarations (image adaptée : formulaire) -->
-  <div class="card" onclick="openDetail('declarations')">
-    <div class="card-img">
-      <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80" 
-           alt="Déclarations et questionnaire" 
-           style="width:100%; height:100%; object-fit:cover;">
-    </div>
-    <div class="card-body">
-      <div class="card-tag">Honnêteté</div>
-      <div class="card-name">Déclarations</div>
-      <div class="card-price">Questionnaires · Conséquences</div>
-    </div>
-  </div>
-
-  <!-- 6. Paiement & investissement -->
-  <div class="card" onclick="openDetail('paiement')">
-    <div class="card-img">
-      <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80" 
-           alt="Paiement et épargne assurance" 
-           style="width:100%; height:100%; object-fit:cover;">
-    </div>
-    <div class="card-body">
-      <div class="card-tag">Votre épargne</div>
-      <div class="card-name">Paiement & investissement</div>
-      <div class="card-price">3 modes · 85% bénéfices min.</div>
-    </div>
-  </div>
-
-  <!-- 7. Avance sur contrat -->
-  <div class="card" onclick="openDetail('avance')">
-    <div class="card-img">
-      <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80" 
-           alt="Avance sur contrat" 
-           style="width:100%; height:100%; object-fit:cover;">
-    </div>
-    <div class="card-body">
-      <div class="card-tag">Liquidités</div>
-      <div class="card-name">Avance sur contrat</div>
-      <div class="card-price">Jusqu'à 80% · 36 mois max</div>
-    </div>
-  </div>
-
-  <!-- 8. Marketing éthique -->
-  <div class="card" onclick="openDetail('ethique-card')">
-    <div class="card-img">
-      <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80" 
-           alt="Marketing éthique et transparence" 
-           style="width:100%; height:100%; object-fit:cover;">
-    </div>
-    <div class="card-body">
-      <div class="card-tag">Notre engagement</div>
-      <div class="card-name">Marketing éthique</div>
-      <div class="card-price">Transparence · Honnêteté · Clarté</div>
-    </div>
-  </div>
-
-</div>
 </div>
 
-<!-- ══ INFO CARDS (sous-section Comprendre) ══ -->
-<div class="section" style="padding-top:0;background:var(--cream-dark)">
+<!-- INFO CARDS -->
+<div class="info-section">
   <div class="info-grid">
-    <div class="info-card">
-      <div class="info-icon">🛡️</div>
-      <h4>C'est quoi l'assurance vie ?</h4>
-      <p>Un contrat entre vous et Magherbia : vous versez des cotisations régulières, et en cas de décès ou à l'échéance, un capital garanti est versé à vos bénéficiaires ou à vous-même.</p>
-    </div>
-    <div class="info-card">
-      <div class="info-icon">📈</div>
-      <h4>Comment fonctionne l'épargne ?</h4>
-      <p>Votre argent est investi de façon sécurisée. Vous recevez chaque année un relevé clair indiquant comment votre capital évolue, les intérêts générés et les frais prélevés.</p>
-    </div>
-    <div class="info-card">
-      <div class="info-icon">👨‍👩‍👧</div>
-      <h4>Qui sont les bénéficiaires ?</h4>
-      <p>Vous choisissez librement qui reçoit le capital : conjoint, enfants, parents ou toute autre personne. Vous pouvez modifier cette désignation à tout moment.</p>
-    </div>
-    <div class="info-card">
-      <div class="info-icon">🏷️</div>
-      <h4>Les frais expliqués</h4>
-      <p>Frais d'entrée, de gestion, de sortie — chez Magherbia, chaque frais est détaillé avant la signature. Nous vous remettons un tableau comparatif complet et lisible.</p>
-    </div>
-    <div class="info-card">
-      <div class="info-icon">🔄</div>
-      <h4>Puis-je récupérer mon argent ?</h4>
-      <p>Oui. Après une période minimale, vous pouvez demander un rachat partiel ou total de votre épargne. Les conditions sont clairement indiquées dans votre contrat.</p>
-    </div>
-    <div class="info-card">
-      <div class="info-icon">⚖️</div>
-      <h4>Vos droits légaux</h4>
-      <p>Vous disposez de 15 jours pour vous rétracter sans frais. Vous pouvez poser toutes vos questions avant, pendant et après la signature. Votre consentement est primordial.</p>
-    </div>
+    <div class="info-card reveal reveal-delay-1"><div class="info-icon">🛡️</div><h4>C'est quoi l'assurance vie ?</h4><p>Un contrat entre vous et Magherbia : vous versez des cotisations régulières, et en cas de décès ou à l'échéance, un capital garanti est versé à vos proches ou à vous-même.</p></div>
+    <div class="info-card reveal reveal-delay-2"><div class="info-icon">📈</div><h4>Comment fonctionne l'épargne ?</h4><p>Votre argent est investi de façon sécurisée selon les règles islamiques (sans intérêts). Vous recevez chaque année un relevé clair de la valeur de votre contrat.</p></div>
+    <div class="info-card reveal reveal-delay-3"><div class="info-icon">👨‍👩‍👧</div><h4>Qui sont les bénéficiaires ?</h4><p>Vous choisissez librement les personnes qui recevront le capital en cas de décès. Vous pouvez modifier cette désignation à tout moment.</p></div>
+    <div class="info-card reveal reveal-delay-1"><div class="info-icon">🏷️</div><h4>Les frais expliqués</h4><p>Frais de souscription, de gestion, de rachat — chaque coût vous est détaillé avant la signature. Aucune surprise ne vous attend après.</p></div>
+    <div class="info-card reveal reveal-delay-2"><div class="info-icon">🔄</div><h4>Puis-je récupérer mon argent ?</h4><p>Oui. Après une période minimale, vous pouvez demander un rachat partiel ou total. Une avance jusqu'à 80% est également possible sans résilier.</p></div>
+    <div class="info-card reveal reveal-delay-3"><div class="info-icon">⚖️</div><h4>Vos droits légaux</h4><p>Vous disposez de 15 jours après la signature pour vous rétracter sans frais et récupérer la totalité de votre prime versée.</p></div>
   </div>
 </div>
 
-<!-- ══ NOTRE ETHIQUE ══ -->
-<section class="section" id="ethique">
-  <div class="ethique-wrap">
-    <div>
-      <h2 class="section-title" style="font-size:clamp(1.8rem,3.5vw,2.5rem)">Le marketing éthique : notre engagement fondamental</h2>
-      <p style="font-size:14px;color:var(--text-muted);line-height:1.8;margin-bottom:32px">Nous refusons de vendre de l'assurance par la peur ou la pression. Notre approche est basée sur la confiance, l'information et le respect de votre autonomie.<br><br>Chaque interaction avec nos équipes suit des principes éthiques stricts, validés par notre comité de conformité.</p>
-      <div class="ethique-steps">
-        <div class="ethique-step">
-          <div class="step-num">1</div>
-          <div class="step-body">
-            <h4>Transparence totale</h4>
-            <p>Toutes les informations sur les produits, frais et risques vous sont communiquées avant la souscription, sans filtre.</p>
-          </div>
-        </div>
-        <div class="ethique-step">
-          <div class="step-num">2</div>
-          <div class="step-body">
-            <h4>Pas de pression commerciale</h4>
-            <p>Nos conseillers ne sont pas rémunérés à la commission. Ils ont le temps et la liberté de vous guider honnêtement.</p>
-          </div>
-        </div>
-        <div class="ethique-step">
-          <div class="step-num">3</div>
-          <div class="step-body">
-            <h4>Adéquation au profil client</h4>
-            <p>Nous proposons uniquement les produits adaptés à votre situation financière, vos objectifs et votre profil de risque.</p>
-          </div>
-        </div>
-        <div class="ethique-step">
-          <div class="step-num">4</div>
-          <div class="step-body">
-            <h4>Droit à l'information</h4>
-            <p>Vous recevez tous les documents avant signature. Aucune décision sous pression. Vous avez le droit de demander des explications à tout moment.</p>
-          </div>
-        </div>
-      </div>
+<!-- ═══ NOTRE ETHIQUE ═══ -->
+<section id="ethique" class="notre-ethique">
+  <div class="section-label">NOTRE ENGAGEMENT</div>
+  <h2 class="reveal">Marketing éthique certifié</h2>
+  <p class="reveal reveal-delay-1">Ce contrat et ce site incarnent les valeurs du code éthique de Taaminate Maghrebia Vie. Une démarche rare, une exigence constante.</p>
+  <div class="ethique-pillars">
+    <div class="pillar reveal reveal-delay-1"><span class="pillar-icon">🔍</span><h3>Transparence</h3><p>Tous les frais présentés avant toute souscription. Aucune information cachée.</p></div>
+    <div class="pillar reveal reveal-delay-2"><span class="pillar-icon">🤝</span><h3>Honnêteté</h3><p>Informations réelles et vérifiables, sans promesses exagérées ou trompeuses.</p></div>
+    <div class="pillar reveal reveal-delay-3"><span class="pillar-icon">⚖️</span><h3>Responsabilité</h3><p>Produits recommandés uniquement s'ils sont adaptés à votre situation réelle.</p></div>
+    <div class="pillar reveal reveal-delay-4"><span class="pillar-icon">📖</span><h3>Clarté</h3><p>Termes techniques traduits en langage simple et compréhensible par tous.</p></div>
+    <div class="pillar reveal reveal-delay-5"><span class="pillar-icon">🚫</span><h3>Sans pression</h3><p>Aucune technique de vente agressive. Vous décidez librement et sereinement.</p></div>
+  </div>
+  <div class="ethique-box reveal">
+    🌿 Site éducatif et informatif · Démarche de marketing éthique certifiée · Taaminate Maghrebia Vie
+  </div>
+</section>
+
+<!-- ═══ RENDEZ-VOUS ═══ -->
+<section class="rdv-section" id="rdv">
+  <div class="rdv-content reveal">
+    <div class="section-label" style="opacity:1;animation:none">PROCHAINE ÉTAPE</div>
+    <h2>Rencontrons-nous<br>sans engagement</h2>
+    <p>Un entretien gratuit de 45 minutes avec un conseiller Magherbia pour répondre à toutes vos questions et analyser votre situation personnelle.</p>
+    <div class="rdv-date">
+      <span class="day">17</span> AVRIL 2025
     </div>
-    <div class="ethique-compare">
-      <h4>Marketing traditionnel vs Marketing éthique Magherbia</h4>
-      <div class="compare-grid">
-        <div class="compare-cell bad">
-          <div class="compare-cell-label">✗ Pratique non-éthique</div>
-          <p>Vendre en jouant sur la peur de la mort ou de la maladie</p>
-        </div>
-        <div class="compare-cell good">
-          <div class="compare-cell-label">✔ Notre approche</div>
-          <p>Expliquer les bénéfices réels et les cas concrets d'usage</p>
-        </div>
-        <div class="compare-cell bad">
-          <div class="compare-cell-label">✗ Pratique non-éthique</div>
-          <p>Cacher les frais dans des petites lignes illisibles</p>
-        </div>
-        <div class="compare-cell good">
-          <div class="compare-cell-label">✔ Notre approche</div>
-          <p>Tableau des frais clair, remis avant toute signature</p>
-        </div>
-        <div class="compare-cell bad">
-          <div class="compare-cell-label">✗ Pratique non-éthique</div>
-          <p>Pousser à signer rapidement avec des "offres limitées"</p>
-        </div>
-        <div class="compare-cell good">
-          <div class="compare-cell-label">✔ Notre approche</div>
-          <p>15 jours de réflexion et droit de rétractation garanti</p>
-        </div>
-      </div>
+    <div class="rdv-btns">
+      <a href="#" class="rdv-btn rdv-btn-green">📅 Prendre rendez-vous</a>
+      <a href="tel:+216XXXXXXXX" class="rdv-btn rdv-btn-outline">📞 Appeler directement</a>
     </div>
   </div>
 </section>
 
-<!-- ══ NOS PRODUITS ══ -->
-<section class="section section-center" id="produits" style="background:var(--cream-dark)">
-  <div class="section-label">📋 Nos contrats</div>
-  <h2 class="section-title">Des produits simples et adaptés</h2>
-  <p class="section-sub">Chaque produit est conçu pour répondre à un besoin précis. Votre conseiller vérifiera avec vous quel contrat correspond à votre situation.</p>
-  <div class="produits-grid">
-    <div class="produit-card">
-      <span class="produit-badge default">Protection famille</span>
-      <h3>Assurance Décès</h3>
-      <p>Protégez vos proches en cas de disparition prématurée. Un capital est versé à vos bénéficiaires pour assurer leur sécurité financière.</p>
-      <ul class="produit-list">
-        <li><span class="produit-dot"></span>Capital garanti dès le 1er mois</li>
-        <li><span class="produit-dot"></span>Bénéficiaires librement désignés</li>
-        <li><span class="produit-dot"></span>Cotisations fixes et prévisibles</li>
-        <li><span class="produit-dot"></span>Exonération en cas d'invalidité</li>
-      </ul>
+<!-- ═══ SIMULATEUR ═══ -->
+<section id="simulateur" class="simulateur-section">
+  <div class="simulateur-container reveal">
+    <div class="simulateur-header">
+      <h2>Estimez votre contrat</h2>
+      <p>Une simulation transparente, sans engagement, pour mieux comprendre votre futur contrat NGM.</p>
     </div>
-    <div class="produit-card featured">
-      <span class="produit-badge featured-badge">⭐ Le plus choisi</span>
-      <h3>Épargne-Retraite Vie</h3>
-      <p>Constituez une épargne sécurisée pour votre retraite tout en bénéficiant d'une couverture décès pendant toute la durée du contrat.</p>
-      <ul class="produit-list">
-        <li><span class="produit-dot"></span>Épargne + protection combinées</li>
-        <li><span class="produit-dot"></span>Taux garanti + participation bénéfices</li>
-        <li><span class="produit-dot"></span>Rachat possible après 3 ans</li>
-        <li><span class="produit-dot"></span>Rapport annuel détaillé</li>
-      </ul>
+    <div class="form-group">
+      <label>Votre âge</label>
+      <input type="number" class="form-input" id="sim-age" placeholder="Ex: 35" min="18" max="65" value="35">
     </div>
-    <div class="produit-card">
-      <span class="produit-badge edu">Éducation</span>
-      <h3>Contrat Éducation</h3>
-      <p>Préparez l'avenir de vos enfants avec une épargne dédiée à leurs études supérieures, versée à leurs 18 ans.</p>
-      <ul class="produit-list">
-        <li><span class="produit-dot"></span>Capital disponible à la majorité</li>
-        <li><span class="produit-dot"></span>Maintien du contrat si décès parent</li>
-        <li><span class="produit-dot"></span>Cotisations adaptables</li>
-        <li><span class="produit-dot"></span>Intérêts composés garantis</li>
-      </ul>
+    <div class="form-group">
+      <label>Cotisation mensuelle (DT)</label>
+      <input type="number" class="form-input" id="sim-cotis" placeholder="Ex: 500" min="100" value="500">
+    </div>
+    <div class="form-group">
+      <label>Durée du contrat</label>
+      <select class="form-select" id="sim-duree">
+        <option value="15">15 ans</option>
+        <option value="20" selected>20 ans</option>
+        <option value="25">25 ans</option>
+        <option value="30">30 ans</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Type de contrat</label>
+      <select class="form-select" id="sim-type">
+        <option value="retraite">Épargne-Retraite</option>
+        <option value="deces">Assurance Décès</option>
+        <option value="education">Contrat Éducation</option>
+      </select>
+    </div>
+    <button class="simulateur-btn" onclick="simuler()">Calculer mon estimation</button>
+    <div id="sim-result">
+      <div class="sim-row"><span>Cotisations totales</span><span id="r-cotis">—</span></div>
+      <div class="sim-row"><span>Participation aux bénéfices (min. 85%)</span><span id="r-benefices">—</span></div>
+      <div class="sim-row"><span>Avance possible (80%)</span><span id="r-avance">—</span></div>
+      <div class="sim-row"><span>💰 Capital estimé à l'échéance</span><span id="r-capital">—</span></div>
     </div>
   </div>
 </section>
 
-<!-- ══ FAQ ══ -->
-<section class="section section-center" id="faq">
-  <div class="section-label">❓ Questions fréquentes</div>
-  <h2 class="section-title">Vos questions méritent des réponses claires</h2>
-  <p class="section-sub">L'assurance vie soulève souvent des doutes légitimes. Voici nos réponses honnêtes.</p>
+<!-- ═══ FAQ ═══ -->
+<section class="faq-section" id="faq">
+  <div class="inner-header reveal">
+    <div class="section-label" style="opacity:1;animation:none">❓ QUESTIONS FRÉQUENTES</div>
+    <h2>Vos questions méritent des réponses claires</h2>
+    <p class="sub">L'assurance vie soulève souvent des doutes. Voici nos réponses honnêtes.</p>
+  </div>
   <div class="faq-wrap">
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <span>Puis-je perdre mon argent avec une assurance vie ?</span>
-        <button class="faq-btn">+</button>
-      </div>
-      <div class="faq-a">Non. Chez Magherbia, votre capital est garanti. Nous ne proposons pas de produits en unités de compte liés aux marchés financiers. Le taux minimum garanti est toujours positif. Vous ne pouvez pas récupérer moins que ce que vous avez versé (hors frais d'entrée).</div>
+    <div class="faq-item reveal">
+      <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Puis-je perdre mon argent avec une assurance vie Magherbia ?</span><button class="faq-btn">+</button></div>
+      <div class="faq-a"><div class="faq-a-inner">Non. Chez Magherbia Vie, votre capital est garanti contractuellement. La compagnie s'engage à vous restituer au minimum la totalité des cotisations versées, à laquelle s'ajoute votre quote-part des bénéfices de gestion (minimum 85% garantis par la loi).</div></div>
     </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <span>Que se passe-t-il si je ne peux plus payer mes cotisations ?</span>
-        <button class="faq-btn">+</button>
-      </div>
-      <div class="faq-a">Votre contrat ne sera pas annulé automatiquement. Vous pouvez demander une suspension temporaire, une réduction de cotisation, ou convertir votre contrat en contrat à cotisations libérées. Notre conseiller étudiera avec vous la meilleure solution selon votre situation.</div>
+    <div class="faq-item reveal reveal-delay-1">
+      <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Que se passe-t-il si je ne peux plus payer mes cotisations ?</span><button class="faq-btn">+</button></div>
+      <div class="faq-a"><div class="faq-a-inner">Vous avez plusieurs options : demander une <strong>suspension temporaire</strong> des cotisations, réduire leur montant, ou transformer votre contrat en contrat réduit (sans nouvelles cotisations mais avec maintien des droits acquis). Votre conseiller vous accompagne dans cette situation sans pénalités abusives.</div></div>
     </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <span>Comment savoir si l'assurance vie est faite pour moi ?</span>
-        <button class="faq-btn">+</button>
-      </div>
-      <div class="faq-a">Lors du premier rendez-vous, votre conseiller réalise une analyse de votre situation financière, familiale et de vos objectifs. Il vous présente uniquement les produits adaptés — pas d'objectif de vente, pas de commission, pas de pression.</div>
+    <div class="faq-item reveal reveal-delay-2">
+      <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Comment fonctionne le droit de rétractation ?</span><button class="faq-btn">+</button></div>
+      <div class="faq-a"><div class="faq-a-inner">Vous disposez de <strong>15 jours calendaires</strong> à compter de la date de signature pour vous rétracter, sans avoir à justifier votre décision. Il suffit d'envoyer une lettre recommandée. Magherbia Vie vous rembourse alors <strong>100% de la prime versée</strong>, sans frais ni pénalités.</div></div>
     </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <span>Vos conseillers sont-ils payés à la commission ?</span>
-        <button class="faq-btn">+</button>
-      </div>
-      <div class="faq-a">Non. Nos conseillers sont rémunérés sur salaire fixe. Ils n'ont aucun intérêt financier à vous vendre un produit plutôt qu'un autre. Leur priorité est votre satisfaction à long terme, pas leur chiffre du mois.</div>
+    <div class="faq-item reveal reveal-delay-3">
+      <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Vos conseillers sont-ils payés à la commission ?</span><button class="faq-btn">+</button></div>
+      <div class="faq-a"><div class="faq-a-inner">Nos conseillers sont rémunérés sur <strong>salaire fixe</strong>, sans commission liée aux ventes. Cela garantit que leurs conseils sont guidés uniquement par votre intérêt, et non par leurs propres revenus. C'est l'un des piliers de notre code éthique.</div></div>
     </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <span>Quels sont exactement les frais de mon contrat ?</span>
-        <button class="faq-btn">+</button>
-      </div>
-      <div class="faq-a">Tous les frais sont détaillés dans un tableau remis avant signature : frais d'entrée (prélevés sur les premières primes), frais de gestion annuels (prélevés sur l'encours), et frais de sortie si rachat anticipé. Aucune surprise cachée.</div>
+    <div class="faq-item reveal reveal-delay-4">
+      <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Le contrat NGM est-il conforme aux principes islamiques ?</span><button class="faq-btn">+</button></div>
+      <div class="faq-a"><div class="faq-a-inner">Oui. Le contrat NGM est structuré selon les principes de la finance participative : pas d'intérêts (riba), investissements dans des secteurs licites, et partage équitable des bénéfices et des risques. Un comité de conformité religieuse valide les placements effectués.</div></div>
+    </div>
+    <div class="faq-item reveal reveal-delay-5">
+      <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Comment puis-je vérifier la valeur de mon épargne ?</span><button class="faq-btn">+</button></div>
+      <div class="faq-a"><div class="faq-a-inner">Magherbia Vie vous adresse chaque année un <strong>relevé de situation</strong> détaillé indiquant : le montant des cotisations versées, la participation aux bénéfices, la valeur de rachat actuelle, et le capital garanti à l'échéance. Ce document est clair et lisible, sans jargon technique.</div></div>
     </div>
   </div>
 </section>
 
-<!-- ══ SIMULATEUR (placeholder) ══ -->
-<section class="section section-center" id="simulateur" style="background:var(--green);padding:60px 5%">
-  <div class="section-label" style="color:rgba(255,255,255,0.6)">🧮 Outil gratuit</div>
-  <h2 class="section-title" style="color:#fff">Simulateur à venir</h2>
-  <p style="color:rgba(255,255,255,0.65);font-size:15px;max-width:420px;margin:0 auto">Notre simulateur de cotisation et de capital sera disponible prochainement. En attendant, contactez un conseiller pour une estimation personnalisée.</p>
-</section>
-
-<!-- ══ FOOTER ══ -->
+<!-- FOOTER -->
 <footer>
   <div class="f-logo">NGM — Nouvelle Génération Magherbia</div>
-  <p>Taaminate Maghrebia Vie · 24 rue Arabie Saoudite, Tunis<br>Agrément Ministère des Finances · Marketing Éthique & Transparent</p>
+  <div class="f-tagline">Taaminate Maghrebia Vie · Marketing Éthique & Transparent</div>
+  <div class="f-links">
+    <a href="#accueil">Accueil</a>
+    <a href="#comprendre">Comprendre</a>
+    <a href="#ethique">Notre Éthique</a>
+    <a href="#rdv">Prendre RDV</a>
+    <a href="#simulateur">Simulateur</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <p>24 rue Arabie Saoudite, Tunis · Agrément Ministère des Finances<br>Site éducatif et informatif — Aucune pression commerciale</p>
 </footer>
 
-<!-- ══ OVERLAY ══ -->
+<!-- DETAIL OVERLAY -->
 <div class="overlay" id="overlay" onclick="closeOnBg(event)">
   <div class="detail-sheet" id="detail-sheet">
     <div class="sheet-handle"></div>
-    <div style="position:relative">
-      <button class="sheet-close" onclick="closeDetail()">✕</button>
-    </div>
+    <button class="sheet-close" onclick="closeDetail()">✕</button>
     <div id="detail-content"></div>
   </div>
 </div>
 
 <script>
-/* ── Mobile menu ── */
+/* ─── NAV ─── */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+});
 function toggleMenu(){
   document.getElementById('hamburger').classList.toggle('open');
   document.getElementById('nav-mobile').classList.toggle('open');
@@ -687,158 +550,212 @@ function closeMenu(){
   document.getElementById('nav-mobile').classList.remove('open');
 }
 
-/* ── Active link on scroll ── */
-const navIds = ['comprendre','ethique','produits','faq','simulateur'];
-window.addEventListener('scroll',()=>{
-  const y = window.scrollY + 90;
-  navIds.forEach(id=>{
-    const el = document.getElementById(id);
-    if(!el) return;
-    const link = document.querySelector(`.nav-links a[href="#${id}"]`);
-    if(!link) return;
-    if(y >= el.offsetTop && y < el.offsetTop + el.offsetHeight){
-      document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
-      link.classList.add('active');
+/* ─── REVEAL ON SCROLL ─── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ─── COUNTER ANIMATION ─── */
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      const el = e.target;
+      const target = parseInt(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      let current = 0;
+      const step = target / 40;
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = Math.round(current) + suffix;
+        if(current >= target) clearInterval(timer);
+      }, 30);
+      counterObserver.unobserve(el);
     }
   });
-});
+}, { threshold: 0.5 });
+document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
 
-/* ── FAQ accordion ── */
+/* ─── FAQ ─── */
 function toggleFaq(el){
   const item = el.parentElement;
   const wasOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
   if(!wasOpen) item.classList.add('open');
 }
 
-/* ── Detail data ── */
+/* ─── SIMULATEUR ─── */
+function simuler(){
+  const age = parseInt(document.getElementById('sim-age').value) || 35;
+  const cotis = parseFloat(document.getElementById('sim-cotis').value) || 500;
+  const duree = parseInt(document.getElementById('sim-duree').value);
+  const type = document.getElementById('sim-type').value;
+  const totalCotis = cotis * 12 * duree;
+  const tauxBenef = type === 'deces' ? 0.04 : type === 'education' ? 0.055 : 0.065;
+  const benefices = totalCotis * tauxBenef * duree * 0.85;
+  const capital = totalCotis + benefices;
+  const avance = capital * 0.80;
+  const fmt = n => new Intl.NumberFormat('fr-TN',{maximumFractionDigits:0}).format(n) + ' DT';
+  document.getElementById('r-cotis').textContent = fmt(totalCotis);
+  document.getElementById('r-benefices').textContent = fmt(benefices);
+  document.getElementById('r-avance').textContent = fmt(avance);
+  document.getElementById('r-capital').textContent = fmt(capital);
+  const result = document.getElementById('sim-result');
+  result.classList.remove('show');
+  void result.offsetWidth;
+  result.classList.add('show');
+}
+
+/* ─── DETAIL DATA ─── */
 const details = {
-  parties:{
-    icon:'🤝',tag:'Section 1 — Le contrat',title:'Les 4 parties du contrat',
-    desc:"Un contrat d'assurance vie implique 4 acteurs distincts. Comprendre leur rôle, c'est comprendre votre contrat.",
-    html:`<table class="detail-table">
-      <tr><th>Partie</th><th>Rôle</th></tr>
-      <tr><td>🏢 <strong>Assureur</strong></td><td>Taaminate Maghrebia Vie — verse les prestations. Siège : 24 rue Arabie Saoudite, Tunis.</td></tr>
-      <tr><td>✍️ <strong>Souscripteur</strong></td><td>Vous — signez, payez les cotisations, êtes titulaire des droits.</td></tr>
-      <tr><td>🙋 <strong>Assuré</strong></td><td>La personne sur qui repose le risque. Son accord écrit est obligatoire.</td></tr>
-      <tr><td>💰 <strong>Bénéficiaire</strong></td><td>Reçoit le capital en cas de sinistre ou décès.</td></tr>
-    </table>
-    <div class="detail-ok" style="margin-top:16px">💡 Ces rôles peuvent être remplis par la même personne ou des personnes différentes.</div>`
+  parties: {
+    icon: '🤝',
+    tag: 'Section 1 — Le contrat',
+    title: 'Les 4 parties du contrat',
+    desc: "Un contrat d'assurance vie NGM implique 4 acteurs distincts aux rôles complémentaires. Comprendre leur rôle, c'est comprendre votre contrat.",
+    html: `
+      <div class="detail-section-title">Qui fait quoi ?</div>
+      <table class="detail-table">
+        <tr><th>Partie</th><th>Rôle</th><th>Obligations</th></tr>
+        <tr><td>🏢 <strong>Assureur</strong></td><td>Taaminate Maghrebia Vie</td><td>Verse les prestations garanties, gère les placements</td></tr>
+        <tr><td>✍️ <strong>Souscripteur</strong></td><td>Vous — celui qui signe</td><td>Paye les cotisations, choisit les bénéficiaires</td></tr>
+        <tr><td>🙋 <strong>Assuré</strong></td><td>La personne assurée</td><td>Répond honnêtement aux questionnaires médicaux</td></tr>
+        <tr><td>💰 <strong>Bénéficiaire</strong></td><td>Reçoit le capital</td><td>Fournit les pièces en cas de sinistre</td></tr>
+      </table>
+      <div class="detail-ok" style="margin-top:16px">💡 <strong>À noter :</strong> Le souscripteur et l'assuré peuvent être la même personne. Le bénéficiaire peut être modifié à tout moment, sauf acceptation formelle.</div>`
   },
-  garanties:{
-    icon:'🛡️',tag:'Section 2 — Couverture',title:'Les garanties NGM',
-    desc:"Le contrat couvre deux situations principales. Des garanties complémentaires sont disponibles en option.",
-    html:`<p class="detail-section-title">Garanties principales</p>
-    <ul class="detail-list">
-      <li><span class="dl-dot"></span><span><strong>Décès avant l'échéance :</strong> Capital décès + rentes versés au bénéficiaire.</span></li>
-      <li><span class="dl-dot"></span><span><strong>Survie à l'échéance :</strong> La totalité de la valeur d'investissement versée à l'assuré.</span></li>
-    </ul>
-    <hr class="detail-sep">
-    <p class="detail-section-title">Garanties complémentaires</p>
-    <ul class="detail-list">
-      <li><span class="dl-dot"></span><span><strong>Invalidité Professionnelle :</strong> Capital en 5 versements annuels. Prend fin à 60 ans.</span></li>
-      <li><span class="dl-dot"></span><span><strong>Garantie Accidents :</strong> Décès accidentel = capital accident + capital décès. Prend fin à 65 ans.</span></li>
-      <li><span class="dl-dot"></span><span><strong>Investissement Supplémentaire :</strong> Versé dans tous les cas.</span></li>
-    </ul>`
+  garanties: {
+    icon: '🛡️',
+    tag: 'Section 2 — Couverture',
+    title: 'Les garanties NGM',
+    desc: "Le contrat NGM couvre deux situations principales, avec des options complémentaires que vous pouvez activer selon vos besoins.",
+    html: `
+      <div class="detail-section-title">Garanties principales</div>
+      <ul class="detail-list">
+        <li><span class="dl-dot"></span><div><strong>Garantie Décès :</strong> En cas de décès de l'assuré avant l'échéance, le capital assuré est versé intégralement aux bénéficiaires désignés, quelles que soient les cotisations déjà versées.</div></li>
+        <li><span class="dl-dot"></span><div><strong>Garantie Survie :</strong> Si l'assuré est en vie à l'échéance du contrat, il reçoit le capital constitué (cotisations + participation aux bénéfices minimum 85%).</div></li>
+      </ul>
+      <div class="detail-section-title" style="margin-top:20px">Options complémentaires</div>
+      <ul class="detail-list">
+        <li><span class="dl-dot"></span><div><strong>Double effet :</strong> En cas de décès simultané du souscripteur et de l'assuré, le capital est doublé.</div></li>
+        <li><span class="dl-dot"></span><div><strong>Invalidité totale et permanente (ITP) :</strong> Exonération des cotisations futures si l'assuré devient invalide à 100%.</div></li>
+        <li><span class="dl-dot"></span><div><strong>Rente éducation :</strong> Versement d'une rente mensuelle aux enfants bénéficiaires jusqu'à leurs 25 ans.</div></li>
+      </ul>`
   },
-  exclusions:{
-    icon:'🚫',tag:'Section 3 — Limites',title:"Ce qui n'est pas couvert",
-    desc:"Par transparence, voici tous les cas où la compagnie ne verse pas les prestations.",
-    html:`<p class="detail-section-title">Exclusions — Garantie Décès</p>
-    <ul class="detail-list">
-      <li><span style="color:#c03030;font-weight:700;min-width:14px">✗</span><span>Suicide au cours de la 1ère année du contrat</span></li>
-      <li><span style="color:#c03030;font-weight:700;min-width:14px">✗</span><span>Actes intentionnels causés par le souscripteur ou bénéficiaire</span></li>
-      <li><span style="color:#c03030;font-weight:700;min-width:14px">✗</span><span>Guerre civile ou étrangère · Émeutes</span></li>
-    </ul>
-    <hr class="detail-sep">
-    <p class="detail-section-title">Exclusions — Invalidité & Accidents</p>
-    <ul class="detail-list">
-      <li><span style="color:#c03030;font-weight:700;min-width:14px">✗</span><span>MST, épidémies, drogues</span></li>
-      <li><span style="color:#c03030;font-weight:700;min-width:14px">✗</span><span>Maladies antérieures volontairement cachées</span></li>
-      <li><span style="color:#c03030;font-weight:700;min-width:14px">✗</span><span>Sports dangereux · État d'ivresse</span></li>
-    </ul>
-    <div class="detail-ok" style="margin-top:16px">💡 Toutes les exclusions sont liées à des actes intentionnels ou des informations cachées.</div>`
+  exclusions: {
+    icon: '🚫',
+    tag: 'Section 3 — Limites',
+    title: "Ce qui n'est pas couvert",
+    desc: "Par transparence totale, voici tous les cas où Magherbia Vie ne verse pas les prestations. Ces exclusions sont définies par la loi et le contrat.",
+    html: `
+      <div class="detail-section-title">Exclusions absolues (dans tous les cas)</div>
+      <ul class="detail-list">
+        <li><span class="dl-x"></span><div><strong>Suicide au cours de la 1ère année :</strong> Aucune prestation n'est versée si le décès résulte d'un suicide dans les 12 premiers mois du contrat.</div></li>
+        <li><span class="dl-x"></span><div><strong>Actes intentionnels du bénéficiaire :</strong> Si le bénéficiaire est l'auteur du décès de l'assuré, il perd ses droits au capital.</div></li>
+        <li><span class="dl-x"></span><div><strong>Guerre et émeutes :</strong> Les décès survenus lors de conflits armés ou d'émeutes civiles sont exclus.</div></li>
+      </ul>
+      <div class="detail-section-title" style="margin-top:20px">Exclusions liées aux déclarations</div>
+      <ul class="detail-list">
+        <li><span class="dl-x"></span><div><strong>Fausse déclaration intentionnelle :</strong> Si le souscripteur a menti sur son état de santé ou ses informations personnelles, le contrat peut être annulé et les prestations refusées.</div></li>
+      </ul>
+      <div class="detail-danger" style="margin-top:16px">⚠️ <strong>Important :</strong> Ces exclusions sont précisément listées dans votre contrat. Tout ce qui n'est pas explicitement exclu est couvert. En cas de doute, votre conseiller peut vous expliquer chaque clause.</div>`
   },
-  retractation:{
-    icon:'↩️',tag:'Section 4 — Votre droit',title:'Droit de rétractation',
-    desc:"Vous avez signé et changé d'avis ? Vous êtes protégé par la loi.",
-    html:`<span class="big-num">15</span>
-    <p class="big-num-lbl">jours pour vous rétracter à partir de la date de signature</p>
-    <table class="detail-table">
-      <tr><th>Vous rendez…</th><th>La compagnie vous rend…</th></tr>
-      <tr><td>📄 L'original du contrat</td><td>💰 <strong>100% de la prime</strong> — sans déduction</td></tr>
-    </table>
-    <hr class="detail-sep">
-    <p class="detail-section-title">Comment vous rétracter ?</p>
-    <ul class="detail-list">
-      <li><span class="dl-dot"></span><span><strong>Lettre recommandée</strong> avec accusé de réception.</span></li>
-      <li><span class="dl-dot"></span><span><strong>En agence</strong> : demande écrite — récupérez un reçu signé.</span></li>
-    </ul>`
+  retractation: {
+    icon: '↩️',
+    tag: 'Section 4 — Votre droit',
+    title: 'Droit de rétractation',
+    desc: "Vous avez signé et changé d'avis ? La loi tunisienne vous protège. Vous avez 15 jours pour revenir sur votre décision sans aucun frais.",
+    html: `
+      <div class="highlight-box">
+        <span class="big-num">15</span>
+        <p class="big-num-lbl" style="color:rgba(255,255,255,0.7)">jours calendaires pour vous rétracter</p>
+        <p>À partir de la date de signature du contrat</p>
+      </div>
+      <div class="detail-section-title" style="margin-top:20px">Comment procéder ?</div>
+      <ul class="detail-list">
+        <li><span class="dl-dot"></span><div><strong>Étape 1 :</strong> Rédigez une lettre de rétractation mentionnant vos coordonnées et le numéro de contrat.</div></li>
+        <li><span class="dl-dot"></span><div><strong>Étape 2 :</strong> Envoyez-la en recommandé avec accusé de réception à Taaminate Maghrebia Vie.</div></li>
+        <li><span class="dl-dot"></span><div><strong>Étape 3 :</strong> Retournez l'original du contrat joint à votre lettre.</div></li>
+      </ul>
+      <table class="detail-table" style="margin-top:16px">
+        <tr><th>Vous rendez</th><th>Magherbia Vie rend</th></tr>
+        <tr><td>L'original du contrat signé</td><td><strong>100% de la prime versée</strong></td></tr>
+        <tr><td>—</td><td>Aucun frais ni pénalité</td></tr>
+      </table>
+      <div class="detail-ok" style="margin-top:16px">✅ Ce droit est garanti par la loi. Aucune justification n'est nécessaire.</div>`
   },
-  declarations:{
-    icon:'📋',tag:'Section 5 — Honnêteté',title:'Vos déclarations',
-    desc:"La sincérité de vos déclarations est la base de votre contrat.",
-    html:`<p class="detail-section-title">Documents à fournir</p>
-    <ul class="detail-list">
-      <li><span class="dl-dot"></span><span>Questionnaire de déclaration du risque</span></li>
-      <li><span class="dl-dot"></span><span>Rapport médical · Questionnaire financier</span></li>
-    </ul>
-    <div class="detail-danger">⚠️ Toute fausse déclaration intentionnelle entraîne la <strong>perte totale de vos droits</strong>.</div>
-    <hr class="detail-sep">
-    <p class="detail-section-title">Erreur d'âge ou de prime</p>
-    <table class="detail-table">
-      <tr><th>Situation</th><th>Conséquence</th></tr>
-      <tr><td>Erreur dans les limites</td><td><span class="tag-pill tag-green">✅ Contrat maintenu</span></td></tr>
-      <tr><td>Âge hors limites</td><td><span class="tag-pill tag-red">❌ Contrat non maintenable</span></td></tr>
-      <tr><td>Prime insuffisante</td><td>📉 Garanties réduites</td></tr>
-      <tr><td>Prime en excès</td><td>💸 Remboursement de la différence</td></tr>
-    </table>`
+  declarations: {
+    icon: '📋',
+    tag: 'Section 5 — Honnêteté',
+    title: 'Vos déclarations',
+    desc: "La sincérité de vos déclarations est la base de votre contrat. Un contrat honnête repose sur des informations honnêtes de votre part.",
+    html: `
+      <div class="detail-section-title">Ce que vous devez déclarer</div>
+      <ul class="detail-list">
+        <li><span class="dl-dot"></span><div><strong>État de santé :</strong> Antécédents médicaux, maladies chroniques, opérations récentes.</div></li>
+        <li><span class="dl-dot"></span><div><strong>Profession :</strong> Certains métiers à risques peuvent affecter la cotisation.</div></li>
+        <li><span class="dl-dot"></span><div><strong>Activités sportives :</strong> Sports extrêmes ou à risques élevés.</div></li>
+        <li><span class="dl-dot"></span><div><strong>Informations personnelles :</strong> Âge réel, identité, situation familiale.</div></li>
+      </ul>
+      <div class="detail-section-title" style="margin-top:20px">Conséquences d'une fausse déclaration</div>
+      <div class="detail-danger">⚠️ <strong>Déclaration intentionnellement fausse :</strong> Nullité du contrat + perte totale de tous vos droits, même pour les sinistres n'ayant aucun lien avec la fausse déclaration.</div>
+      <div class="detail-ok" style="margin-top:12px">✅ <strong>Erreur non intentionnelle :</strong> Réduction proportionnelle des prestations selon le rapport cotisation réelle / cotisation théorique. Votre bonne foi est prise en compte.</div>`
   },
-  paiement:{
-    icon:'💳',tag:'Section 6 — Votre épargne',title:'Paiement & investissement',
-    desc:"Plusieurs modes de paiement disponibles. Votre argent est capitalisé avec un minimum légal garanti.",
-    html:`<p class="detail-section-title">Modes de paiement</p>
-    <ul class="detail-list">
-      <li><span class="dl-dot"></span><span><strong>Au siège ou chez l'agent</strong> — reçu signé remis en main propre.</span></li>
-      <li><span class="dl-dot"></span><span><strong>Virement bancaire</strong> — traçable.</span></li>
-      <li><span class="dl-dot"></span><span><strong>Prélèvement sur salaire</strong> — avec votre accord écrit.</span></li>
-    </ul>
-    <div class="detail-ok" style="margin-top:14px;text-align:center">
-      <span class="big-num" style="font-size:3rem">85%</span>
-      <span style="font-size:13px;color:var(--green);display:block;margin-top:4px">des bénéfices nets minimum reversés — garanti par la loi.</span>
-    </div>`
+  paiement: {
+    icon: '💳',
+    tag: 'Section 6 — Votre épargne',
+    title: 'Paiement & investissement',
+    desc: "Plusieurs modes de cotisation s'adaptent à votre situation. Votre épargne est investie selon les principes islamiques, avec une participation aux bénéfices garantie.",
+    html: `
+      <div class="detail-section-title">Modes de paiement disponibles</div>
+      <table class="detail-table">
+        <tr><th>Mode</th><th>Fréquence</th><th>Avantage</th></tr>
+        <tr><td>🔄 Mensuel</td><td>12 fois/an</td><td>Budget maîtrisé</td></tr>
+        <tr><td>📅 Trimestriel</td><td>4 fois/an</td><td>Moins de virements</td></tr>
+        <tr><td>💼 Annuel</td><td>1 fois/an</td><td>Légère réduction possible</td></tr>
+      </table>
+      <div class="detail-section-title" style="margin-top:20px">Participation aux bénéfices</div>
+      <div class="highlight-box">
+        <span class="big-num">85%</span>
+        <p class="big-num-lbl">des bénéfices nets minimum reversés</p>
+        <p>Garanti contractuellement et par la loi tunisienne sur les assurances</p>
+      </div>
+      <div class="detail-ok" style="margin-top:16px">📊 Votre relevé annuel vous indique précisément votre quote-part des bénéfices de l'exercice.</div>`
   },
-  avance:{
-    icon:'💵',tag:'Section 7 — Liquidités',title:'Avance sur contrat',
-    desc:"Un prêt garanti par votre épargne — sans résilier votre contrat.",
-    html:`<p class="detail-section-title">Conditions</p>
-    <table class="detail-table">
-      <tr><th>Condition</th><th>Valeur</th></tr>
-      <tr><td>Durée minimale</td><td><strong>2 ans</strong></td></tr>
-      <tr><td>Montant maximum</td><td><strong>80%</strong> de l'épargne</td></tr>
-      <tr><td>Avances simultanées</td><td><strong>1 seule</strong></td></tr>
-      <tr><td>Durée max remboursement</td><td><strong>36 mois</strong></td></tr>
-    </table>
-    <div class="detail-danger" style="margin-top:14px">⚠️ Après 36 mois impayés, le solde est converti en <strong>rachat partiel</strong> automatiquement.</div>`
-  },
-  'ethique-card':{
-    icon:'🌿',tag:'Notre engagement',title:'Marketing éthique',
-    desc:"Ce contrat incarne les valeurs du code éthique de Taaminate Maghrebia Vie.",
-    html:`<ul class="detail-list">
-      <li><span class="dl-dot"></span><span><strong>Transparence</strong> — Tous les frais présentés avant souscription.</span></li>
-      <li><span class="dl-dot"></span><span><strong>Honnêteté</strong> — Informations réelles, sans promesses exagérées.</span></li>
-      <li><span class="dl-dot"></span><span><strong>Responsabilité</strong> — Produits adaptés à votre situation.</span></li>
-      <li><span class="dl-dot"></span><span><strong>Clarté</strong> — Termes techniques simplifiés.</span></li>
-      <li><span class="dl-dot"></span><span><strong>Sans pression</strong> — Vous décidez librement.</span></li>
-    </ul>
-    <div class="detail-ok" style="margin-top:16px">Site éducatif et informatif · Démarche de marketing éthique certifiée.</div>`
+  avance: {
+    icon: '💵',
+    tag: 'Section 7 — Liquidités',
+    title: 'Avance sur contrat',
+    desc: "Besoin de liquidités sans vouloir résilier votre contrat ? L'avance sur contrat est un prêt garanti par votre épargne. Vous gardez votre couverture.",
+    html: `
+      <div class="highlight-box">
+        <span class="big-num">80%</span>
+        <p class="big-num-lbl">de l'épargne constituée, disponible en avance</p>
+      </div>
+      <div class="detail-section-title" style="margin-top:20px">Conditions de l'avance</div>
+      <table class="detail-table">
+        <tr><th>Paramètre</th><th>Valeur</th></tr>
+        <tr><td>Montant maximum</td><td><strong>80% de la valeur de rachat</strong></td></tr>
+        <tr><td>Durée maximale</td><td><strong>36 mois renouvelables</strong></td></tr>
+        <tr><td>Taux appliqué</td><td>Taux communiqué par Magherbia</td></tr>
+        <tr><td>Garanties maintenues</td><td><strong>Oui — couverture décès continue</strong></td></tr>
+        <tr><td>Résiliation du contrat</td><td>Non requise</td></tr>
+      </table>
+      <div class="detail-section-title" style="margin-top:20px">Comment rembourser ?</div>
+      <ul class="detail-list">
+        <li><span class="dl-dot"></span><div>Remboursement libre, partiel ou total, à tout moment.</div></li>
+        <li><span class="dl-dot"></span><div>À l'échéance : le montant de l'avance est déduit du capital versé.</div></li>
+        <li><span class="dl-dot"></span><div>En cas de décès : déduit du capital versé aux bénéficiaires.</div></li>
+      </ul>
+      <div class="detail-ok">💡 L'avance est plus avantageuse qu'un crédit classique car votre contrat continue de fructifier pendant toute la durée de l'avance.</div>`
   }
 };
 
 function openDetail(key){
   const d = details[key];
-  document.getElementById('detail-content').innerHTML=`
-    <div class="detail-hero">${d.icon}</div>
+  if(!d) return;
+  document.getElementById('detail-content').innerHTML = `
+    <div class="detail-hero"><span class="detail-hero-icon">${d.icon}</span></div>
     <div class="detail-body">
       <div class="detail-tag">${d.tag}</div>
       <div class="detail-title">${d.title}</div>
@@ -847,17 +764,16 @@ function openDetail(key){
       ${d.html}
     </div>`;
   document.getElementById('overlay').classList.add('open');
-  document.getElementById('detail-sheet').scrollTop=0;
-  document.body.style.overflow='hidden';
+  document.body.style.overflow = 'hidden';
 }
 function closeDetail(){
   document.getElementById('overlay').classList.remove('open');
-  document.body.style.overflow='';
+  document.body.style.overflow = '';
 }
 function closeOnBg(e){
-  if(e.target===document.getElementById('overlay')) closeDetail();
+  if(e.target === document.getElementById('overlay')) closeDetail();
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDetail()});
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeDetail(); });
 </script>
 </body>
 </html>
