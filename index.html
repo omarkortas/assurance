@@ -94,21 +94,18 @@ nav.scrolled{box-shadow:0 2px 24px rgba(26,74,46,0.10);background:rgba(245,240,2
 @keyframes scrollPulse{0%,100%{opacity:0.3;transform:scaleY(0.5)}50%{opacity:1;transform:scaleY(1)}}
 
 /* CARDS GRID */
-.cards-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;max-width:1140px;width:100%;position:relative;z-index:1;opacity:0;animation:fadeUp .8s ease forwards .85s}
+.cards-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;max-width:1140px;width:100%;position:relative;z-index:1;margin-top:6px;opacity:0;animation:fadeUp .8s ease forwards .85s}
 @media(max-width:900px){.cards-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:560px){.cards-grid{grid-template-columns:repeat(2,1fr)}}
-.ethic-card{background:var(--white);border-radius:18px;padding:24px 16px 20px;transition:all .45s cubic-bezier(.34,1.56,.64,1);box-shadow:0 4px 20px rgba(26,74,46,0.05);cursor:default;position:relative;display:flex;flex-direction:column;align-items:center;text-align:center}
-.ethic-card::before{content:'';position:absolute;inset:0;border-radius:18px;border:1px solid var(--border);transition:border-color .4s,box-shadow .4s;pointer-events:none}
-.ethic-card::after{content:'';position:absolute;bottom:0;left:20%;right:20%;height:3px;background:linear-gradient(90deg,var(--green),var(--gold));border-radius:3px;transform:scaleX(0);transform-origin:center;transition:transform .4s}
-.ethic-card:hover{transform:translateY(-10px);box-shadow:0 20px 48px rgba(26,74,46,0.10)}
-.ethic-card:hover::before{border-color:var(--green-mid);box-shadow:inset 0 0 0 1px rgba(26,74,46,0.06)}
-.ethic-card:hover::after{transform:scaleX(1)}
-.ethic-card .icon{width:52px;height:52px;border-radius:50%;background:var(--green-pale);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px;transition:all .45s;flex-shrink:0;position:relative}
-.ethic-card .icon::after{content:'';position:absolute;inset:-5px;border-radius:50%;border:2px solid rgba(26,74,46,0.06);transition:all .4s}
-.ethic-card:hover .icon{background:var(--green);transform:scale(1.1)}
-.ethic-card:hover .icon::after{border-color:rgba(26,74,46,0.15);transform:scale(1.12)}
-.ethic-card h3{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:4px;color:var(--green);font-weight:700}
-.ethic-card p{font-size:12px;color:var(--text-muted);line-height:1.6}
+.ethic-card{border-radius:16px;padding:60px 16px 18px;transition:all .45s cubic-bezier(.34,1.56,.64,1);box-shadow:0 6px 24px rgba(26,74,46,0.08);cursor:default;position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;overflow:hidden;background-size:cover;background-position:center;min-height:180px}
+.ethic-card::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,74,46,0.4) 0%,rgba(26,74,46,0.85) 100%);transition:opacity .4s;z-index:0}
+.ethic-card::after{content:'';position:absolute;inset:0;border-radius:16px;border:1px solid rgba(255,255,255,0.15);pointer-events:none;z-index:1}
+.ethic-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(26,74,46,0.18)}
+.ethic-card:hover::before{background:linear-gradient(180deg,rgba(26,74,46,0.3) 0%,rgba(26,74,46,0.75) 100%)}
+.ethic-card .icon{width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:26px;transition:all .45s;flex-shrink:0;position:absolute;top:12px;left:14px;z-index:2;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.3))}
+.ethic-card:hover .icon{transform:scale(1.2) rotate(-6deg)}
+.ethic-card h3{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:4px;color:#fff;font-weight:700;position:relative;z-index:2;text-shadow:0 1px 6px rgba(0,0,0,0.3)}
+.ethic-card p{font-size:12px;color:rgba(255,255,255,0.75);line-height:1.6;position:relative;z-index:2;text-shadow:0 1px 4px rgba(0,0,0,0.2)}
 .ethic-card .card-line{display:none}
 
 /* ─── STATS ─── */
@@ -346,27 +343,27 @@ footer p{font-size:12px;color:rgba(255,255,255,0.25);line-height:1.9}
     <a href="#rdv" class="hero-btn hero-btn-outline">Prendre rendez-vous</a>
   </div>
   <div class="cards-grid">
-    <div class="ethic-card">
+    <div class="ethic-card" style="background-image:url('https://images.unsplash.com/photo-1544396821-4dd40b938ad3?auto=format&fit=crop&w=400&q=80')">
       <div class="icon">🔍</div>
       <h3>Transparence</h3>
       <p>Tous les frais, garanties et exclusions sont expliqués clairement, avant toute souscription.</p>
     </div>
-    <div class="ethic-card">
+    <div class="ethic-card" style="background-image:url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=400&q=80')">
       <div class="icon">🤝</div>
       <h3>Honnêteté</h3>
       <p>Nous présentons des informations réelles et vérifiables, sans promesses exagérées.</p>
     </div>
-    <div class="ethic-card">
+    <div class="ethic-card" style="background-image:url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=400&q=80')">
       <div class="icon">⚖️</div>
       <h3>Responsabilité</h3>
       <p>Nous vous aidons à prendre des décisions adaptées à votre situation personnelle.</p>
     </div>
-    <div class="ethic-card">
+    <div class="ethic-card" style="background-image:url('https://images.unsplash.com/photo-1490750967868-88aa4f44baee?auto=format&fit=crop&w=400&q=80')">
       <div class="icon">📖</div>
       <h3>Clarté</h3>
       <p>Les termes techniques sont simplifiés pour que vous compreniez vraiment votre contrat.</p>
     </div>
-    <div class="ethic-card">
+    <div class="ethic-card" style="background-image:url('https://images.unsplash.com/photo-1470071459604-7c8f8a78d02a?auto=format&fit=crop&w=400&q=80')">
       <div class="icon">🚫</div>
       <h3>Sans pression</h3>
       <p>Notre objectif n'est pas de vendre, mais de vous informer. Vous décidez librement.</p>
